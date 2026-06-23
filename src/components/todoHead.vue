@@ -29,27 +29,6 @@
         flex: 1;
         min-width: 180px;
     }
-
-    /* 移动端适配 */
-@media (max-width: 480px) {
-    .midBox {
-        justify-content: center;
-        gap: 10px;
-    }
-    
-    .todoHead h2 {
-        font-size: 18px;
-        margin: 5px 0;
-    }
-    
-    .smallNumber {
-        min-width: 20px;
-        height: 12px;
-        line-height: 10px;
-        font-size: 12px;
-        padding: 4px 8px;
-    }
-}
 </style>
 
 <script>

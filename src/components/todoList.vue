@@ -78,49 +78,6 @@
         text-decoration: line-through;
         color: rgb(104, 104, 104);
     }
-    /* 移动端适配 */
-@media (max-width: 480px) {
-    .midBox {
-        width: 95%;
-    }
-    
-    .listSingle {
-        height: 50px;
-        padding: 8px 5px 8px 15px;
-        font-size: 15px;
-    }
-    
-    .text {
-        width: 65%;
-        font-size: 14px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    
-    .delete {
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-        font-size: 20px;
-        margin-left: 5%;
-        flex-shrink: 0;
-    }
-    
-    .delete:hover {
-        background-color: transparent;
-    }
-    
-    .select {
-        width: 20px;
-        height: 20px;
-        line-height: 16px;
-        font-size: 12px;
-        margin-right: 10px;
-        flex-shrink: 0;
-        border-radius: 10px;
-    }
-}
 </style>
 
 <script>
