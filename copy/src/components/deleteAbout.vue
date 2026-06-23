@@ -30,21 +30,6 @@
         cursor: pointer;
         box-shadow: 0 4px 15px rgba(87, 112, 223, 0.4);
     }
-
-    /* 移动端适配 */
-@media (max-width: 480px) {
-    .midBox {
-        margin: 12px 5px;
-        justify-content: center;
-    }
-    
-    .myButton {
-        width: 80%;
-        height: 40px;
-        font-size: 14px;
-        line-height: 40px;
-    }
-}
 </style>
 
 <script>

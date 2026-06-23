@@ -109,23 +109,4 @@ export default {
     gap: 20px;
     margin: 0 auto;
   }
-  
-  /* 手机端适配 */
-@media (max-width: 480px) {
-    .app {
-        border-radius: 0;
-        box-shadow: none;
-        border: none;
-        max-width: 100%;
-    }
-    
-    .title {
-        font-size: 22px !important;
-    }
-    
-    .rowBox {
-        flex-direction: column;
-        gap: 8px !important;
-    }
-}
 </style>

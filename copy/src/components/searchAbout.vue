@@ -30,24 +30,6 @@
         border-radius: 20px;
         outline: none;
     }
-
-    /* 移动端适配 */
-@media (max-width: 480px) {
-    .searchAbout {
-        gap: 8px;
-        flex: 1;
-    }
-    
-    .MyInput {
-        width: 80%;
-        padding: 6px 15px;
-        font-size: 14px;
-    }
-    
-    .searchIcon {
-        font-size: 20px;
-    }
-}
 </style>
 
 <script>

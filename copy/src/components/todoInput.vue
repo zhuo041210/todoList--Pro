@@ -49,28 +49,6 @@
         transform: scale(0.98);
         box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.3);
     }
-
-    /* 移动端适配 */
-@media (max-width: 480px) {
-    .midBox {
-        width: 95%;
-        gap: 8px;
-    }
-    
-    input {
-        width: 70%;
-        padding: 8px 12px;
-        font-size: 14px;
-    }
-    
-    button {
-        width: 25%;
-        height: 38px;
-        font-size: 13px;
-        padding: 0 8px;
-        white-space: nowrap;
-    }
-}
 </style>
 
 <script>
