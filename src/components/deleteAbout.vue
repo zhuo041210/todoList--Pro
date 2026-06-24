@@ -1,6 +1,10 @@
 <template>
     <div class="delete">
         <div class="midBox">
+            <div class="container" @click="changeAll">
+                <div class="select"  :class="{changeFace:isAll}">{{ isAll ? '✓':' ' }}</div>
+                <span class="mySpan" >全选所有任务</span>
+            </div>
             <button class="myButton" @click="deleteMulti">🗑️ 清空完成任务</button>
         </div>
     </div>
@@ -15,11 +19,22 @@
     .midBox {
         margin: 20px;
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-start;
+        align-items: center;
+        gap:6px;
+    }
+    .container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .container:hover {
+        cursor: pointer;
     }
     .myButton {
         width: 25%;
         height: 34px;
+        margin: 0 0 0 auto;
         line-height: 34px;
         border: none;
         border-radius: 17px;
@@ -29,6 +44,25 @@
         font-weight: 500;
         cursor: pointer;
         box-shadow: 0 4px 15px rgba(87, 112, 223, 0.4);
+    }
+    .mySpan {
+        font-size: 14px;
+        line-height: 35px;
+    }
+    .select {
+        box-sizing: border-box;
+        width: 18px;
+        height: 18px;
+        text-align: center;
+        color: white;
+        line-height: 14px;
+        font-size: 12px;
+        border:2px solid rgb(173, 173, 173);
+        border-radius: 9px;
+        background-color: rgb(235, 235, 235);
+    }
+    .changeFace {
+        background-color: rgb(23, 236, 23);
     }
 </style>
 
@@ -43,7 +77,14 @@ import { mapState } from 'vuex';
             }
         },
         computed:{
-            ...mapState(['todoList'])
+            ...mapState(['todoList']),
+            isAll(){
+                const doneListLength = this.todoList.filter((todo=>{
+                    return todo.isClear === true
+                })).length
+                if(doneListLength === this.todoList.length) return true
+                else return false
+            }
         },
         methods:{
             deleteMulti(){
@@ -73,7 +114,13 @@ import { mapState } from 'vuex';
                             message: '取消删除'})        
                     })
                 }
-                
+            },
+            changeAll(){
+                if(this.isAll){
+                    this.$store.commit('CLEARALL')
+                }else{
+                    this.$store.commit('FINISHALL')
+                }
             }
         }
     }

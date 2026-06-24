@@ -1,21 +1,23 @@
 <template>
-  <div class="app">
-    <h1  :class="{ WorkDay:isWorkDay }" class="title">{{ DateType }}</h1>
-    <MyHeader/>
-    <div class="rowBox">
-      <todoHead/>
-      <searchAbout/>
-    </div>
-    <todoInput/>
-      <todoList/>
-      <transition name="BarAni">
+    <div class="app">
+      <h1  :class="{ WorkDay:isWorkDay }" class="title">{{ DateType }}</h1>
+      <MyHeader/>
+      <div class="rowBox">
+        <todoHead/>
+        <searchAbout/>
+      </div>
+      <todoInput/>
+        <todoList/>
+        <transition name="BarAni">
           <progressBar v-if="todoList.length !== 0"/>
-      </transition>
-      <transition name="DeleteAni">
+        </transition>
+        <transition name="DeleteAni">
           <deleteAbout v-if="todoList.length !== 0"/>
-      </transition>
-    <h2 class="noRoutine" v-show="todoList.length === 0">✨ 没有待办 · 享受宁静吧</h2>
-  </div>
+        </transition>
+        <transition name="RestAni">
+          <h2 class="noRoutine" v-if="todoList.length === 0">✨ 没有待办 · 享受宁静吧</h2>
+        </transition>
+    </div> 
 </template>
 
 <script>
@@ -45,7 +47,7 @@ export default {
   data(){
     return {
       day:'',
-      isWorkDay: true
+      isWorkDay: true,
     }
   },
   computed:{
@@ -122,13 +124,13 @@ export default {
   .BarAni-enter-active {
         transition: all 0.6s ease;
   }
-  .BarAni-leave-active {
-        transition: all 0.4s ease;
+  /* .BarAni-leave-active {
+        transition: all 0.6s ease;
   }
   .BarAni-leave-to {
         opacity: 0;
         transform: translateY(-10px);
-  }
+  } */
   /* 右下删除框简单动画 */
   .DeleteAni-enter {  
         opacity: 0;
@@ -137,11 +139,20 @@ export default {
   .DeleteAni-enter-active {
         transition: all 0.6s ease;
   }
-  .DeleteAni-leave-active {
-        transition: all 0.4s ease;
+  /* .DeleteAni-leave-active {
+        transition: all 0.6s ease;
   }
   .DeleteAni-leave-to {
         opacity: 0;
         transform: translateY(-10px);
+  } */
+  /* 无任务时简单动画 */
+  .RestAni-enter {  
+        opacity: 0;
+        transform: translateY(30px);
   }
+  .RestAni-enter-active {
+        transition: all 0.6s ease;
+  }
+  
 </style>

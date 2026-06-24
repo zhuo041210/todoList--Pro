@@ -33,8 +33,6 @@
         line-height: 40px;
         display: flex;
         align-items: center;
-        /* user-select: none; */
-        transition: all 0.5s ease;
     }
     .listSingle:hover {
         background: rgb(228, 228, 228);
@@ -80,8 +78,7 @@
         text-decoration: line-through;
         color: rgb(104, 104, 104);
     }
-
-    /* 尝试一下动画 */
+    
     .fade-enter {  
         opacity: 0;
         transform: translateY(-10px);
@@ -90,14 +87,14 @@
         background-color: rgb(229, 252, 229);
         transition: all 0.6s ease;
     }
-    .fade-leave-active {
+    /* .fade-leave-active {
         background-color: rgb(253, 197, 197);
-        transition: all 0.4s ease;
+        transition: all 0.6s ease;
     }
     .fade-leave-to {
         opacity: 0;
         transform: translateY(-10px);
-    }
+    } */
 </style>
 
 <script>

@@ -29,7 +29,19 @@ const mutations = {
     },
     SEARCHKEYWORD(state, keyword) {
         state.searchKeyword = keyword
-    }
+    },
+    CLEARALL(state){
+        state.todoList.forEach(todo => {
+            todo.isClear = false
+        })
+        localStorage.setItem('todoList',JSON.stringify(state.todoList))
+    },
+    FINISHALL(state){
+        state.todoList.forEach(todo => {
+            todo.isClear = true
+        })
+        localStorage.setItem('todoList',JSON.stringify(state.todoList))
+    },
 }
 
 const state = {
