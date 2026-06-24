@@ -3,8 +3,31 @@
         <div class="midBox">
             <transition-group name="fade" tag="div">
                 <div class="listSingle" v-for="thing in filteredList" :key="thing.id">
-                    <div class="select" @click="changeFace(thing.id)" :class="{ Active: thing.isClear }">{{ thing.isClear?'✓':' ' }}</div>
-                    <span class="text" :class="{ Done: thing.isClear }">{{ thing.content }}</span>
+                    <!-- todo前方的勾选框 -->
+                    <div class="select" 
+                        @click="changeFace(thing.id)" 
+                        :class="{ Active: thing.isClear }">
+                        {{ thing.isClear?'✓':' ' }}
+                    </div>
+                    
+                    <!-- 修改内容的功能 -->
+                    <span class="text" 
+                        @dblclick="edit(thing.id)" 
+                        v-if="editId !== thing.id" 
+                        :class="{ Done: thing.isClear }">
+                        {{ thing.content }}
+                    </span>
+                    <input type="text"  
+                        v-else 
+                        v-focus 
+                        v-model="editContent" 
+                        @blur="editFinish(thing.id)" 
+                        @keyup.enter="$event.target.blur()" 
+                        @keyup.esc="rollBackContent"
+                        placeholder="请输入更改内容..." 
+                        class="myInput">
+                    
+                    <!-- todo后方的删除键 -->
                     <div class="delete" @click="deleteTodo(thing.id)">×</div>
                 </div>
             </transition-group>
@@ -13,6 +36,22 @@
 </template>
 
 <style scoped>
+    .myInput {
+        box-sizing: border-box;
+        width: 50%;
+        padding: 10px 15px 10px 25px;
+        font-size: 16px;
+        border: 2px solid #dce1e8;
+        border-radius: 21px;
+        background-color: #f8f9fa;
+        transition:all 0.3s ease;
+    }
+    .myInput:focus {
+        outline: none;
+        border-color: #3498db;
+        background: #ffffff;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+    }
     .midBox {
         width: 90%;
         margin: 0 auto;
@@ -61,7 +100,7 @@
         border-radius: 18px;
         font-size: 24px;
         color: rgb(148, 148, 148);
-        margin-left: 10%;
+        margin-left: auto;
         text-align: center;
         line-height: 36px;
         cursor: pointer;
@@ -104,7 +143,16 @@ import { mapState } from 'vuex';
         name:'ToDoList',
         data(){
             return {
-
+                editId:0,
+                editContent:'',
+                isEsc:false
+            }
+        },
+        directives:{
+            focus:{
+                inserted(element){
+                    element.focus()
+                }
             }
         },
         computed:{
@@ -143,6 +191,39 @@ import { mapState } from 'vuex';
             },
             changeFace(id){
                 this.$store.commit('CHANGESTYLE',id)
+            },
+            edit(id){
+                // 点击后拿到editId 并把内容拿到赋值给输入框
+                this.editId = id
+                this.editContent = this.todoList.find((todo)=>{
+                    return todo.id === id
+                }).content
+            },
+            editFinish(id){
+                if(this.isEsc){
+                    this.$message({
+                        type: 'info',
+                        message: '已取消编辑'
+                    })
+                }
+                else if(!this.editContent){
+                   this.$message({
+                        message: '编辑后消息不能为空！',
+                        type: 'warning'
+                    })
+                }else{
+                    this.$store.commit('EDITFINISH',{ id , editContent:this.editContent })
+                    this.$message({
+                        type: 'success',
+                        message: '编辑成功'})
+                }
+                this.editId = 0,
+                this.editContent = ''
+                this.isEsc = false
+            },
+            rollBackContent(event){
+                this.isEsc = true
+                event.target.blur()
             }
         }
     }

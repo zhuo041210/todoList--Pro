@@ -42,6 +42,13 @@ const mutations = {
         })
         localStorage.setItem('todoList',JSON.stringify(state.todoList))
     },
+    EDITFINISH(state,{id,editContent}){
+        const result = state.todoList.find((todo)=>{
+            return todo.id === id
+        })
+        result.content = editContent
+        localStorage.setItem('todoList',JSON.stringify(state.todoList))
+    }
 }
 
 const state = {
