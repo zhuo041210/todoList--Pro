@@ -1,11 +1,13 @@
 <template>
     <div class="todoList">
         <div class="midBox">
-            <div class="listSingle" v-for="thing in filteredList" :key="thing.id">
-                <div class="select" @click="changeFace(thing.id)" :class="{ Active: thing.isClear }">{{ thing.isClear?'✓':' ' }}</div>
-                <span class="text" :class="{ Done: thing.isClear }">{{ thing.content }}</span>
-                <div class="delete" @click="deleteTodo(thing.id)">×</div>
-            </div>
+            <transition-group name="fade" tag="div">
+                <div class="listSingle" v-for="thing in filteredList" :key="thing.id">
+                    <div class="select" @click="changeFace(thing.id)" :class="{ Active: thing.isClear }">{{ thing.isClear?'✓':' ' }}</div>
+                    <span class="text" :class="{ Done: thing.isClear }">{{ thing.content }}</span>
+                    <div class="delete" @click="deleteTodo(thing.id)">×</div>
+                </div>
+            </transition-group>
         </div>
     </div>
 </template>
@@ -77,6 +79,24 @@
     .Done {
         text-decoration: line-through;
         color: rgb(104, 104, 104);
+    }
+
+    /* 尝试一下动画 */
+    .fade-enter {  
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    .fade-enter-active {
+        background-color: rgb(229, 252, 229);
+        transition: all 0.6s ease;
+    }
+    .fade-leave-active {
+        background-color: rgb(253, 197, 197);
+        transition: all 0.4s ease;
+    }
+    .fade-leave-to {
+        opacity: 0;
+        transform: translateY(-10px);
     }
 </style>
 

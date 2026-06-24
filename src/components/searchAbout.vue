@@ -30,6 +30,12 @@
         border-radius: 20px;
         outline: none;
     }
+    .MyInput:focus {
+        outline: none;
+        border-color: #3498db;
+        background: #ffffff;
+        box-shadow: 0 0 0 1px rgba(52, 152, 219, 0.1);
+    }
 </style>
 
 <script>

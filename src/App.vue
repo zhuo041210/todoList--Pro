@@ -7,10 +7,13 @@
       <searchAbout/>
     </div>
     <todoInput/>
-    <template  v-if="todoList.length !== 0">
       <todoList/>
-      <deleteAbout/>
-    </template>
+      <transition name="BarAni">
+          <progressBar v-if="todoList.length !== 0"/>
+      </transition>
+      <transition name="DeleteAni">
+          <deleteAbout v-if="todoList.length !== 0"/>
+      </transition>
     <h2 class="noRoutine" v-show="todoList.length === 0">✨ 没有待办 · 享受宁静吧</h2>
   </div>
 </template>
@@ -23,6 +26,7 @@ import todoInput from './components/todoInput.vue';
 import todoList from './components/todoList.vue';
 import deleteAbout from './components/deleteAbout.vue';
 import searchAbout from './components/searchAbout.vue';
+import progressBar from './components/progressBar.vue';
 
 import moment from 'moment'
 moment.locale('zh-cn')
@@ -35,7 +39,8 @@ export default {
     todoInput,
     todoList,
     deleteAbout,
-    searchAbout
+    searchAbout,
+    progressBar,
   },
   data(){
     return {
@@ -107,6 +112,36 @@ export default {
     display: flex;
     width: 90%;
     gap: 20px;
-    margin: 0 auto;
+    margin: 0 auto 3px auto;
+  }
+  /* 进度条简单动画 */
+  .BarAni-enter {  
+        opacity: 0;
+        transform: translateY(-10px);
+  }
+  .BarAni-enter-active {
+        transition: all 0.6s ease;
+  }
+  .BarAni-leave-active {
+        transition: all 0.4s ease;
+  }
+  .BarAni-leave-to {
+        opacity: 0;
+        transform: translateY(-10px);
+  }
+  /* 右下删除框简单动画 */
+  .DeleteAni-enter {  
+        opacity: 0;
+        transform: translateY(-10px);
+  }
+  .DeleteAni-enter-active {
+        transition: all 0.6s ease;
+  }
+  .DeleteAni-leave-active {
+        transition: all 0.4s ease;
+  }
+  .DeleteAni-leave-to {
+        opacity: 0;
+        transform: translateY(-10px);
   }
 </style>
