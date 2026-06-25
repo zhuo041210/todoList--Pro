@@ -1,7 +1,11 @@
 <template>
     <div class="mainProgress">
+
+        <!-- 悬浮框组件，还在完善！ -->
+        <popAbout v-show="isPop"/>
+
         <div class="midBox">
-            <div class="progressContainer">
+            <div class="progressContainer" @mouseenter="popOut" @mouseleave="popLeave" >
                 <span class="span">📊 
                     &nbsp;&nbsp; 当前完成情况 &nbsp;&nbsp; 
                     {{ doneNumber }}/{{ allNumber }} &nbsp;&nbsp;
@@ -15,6 +19,7 @@
 
 <style scoped>
     .mainProgress {
+        position: relative;
         margin: 15px 0;
     }
     .midBox {
@@ -45,12 +50,22 @@
 </style>
 
 <script>
+import popAbout from './popAbout.vue';
+
 import { mapState } from 'vuex';
 
     export default {
         name:'MyProgress',
+        data(){
+            return {
+                timeId:null
+            }
+        },
+        components:{
+            popAbout
+        },
         computed:{
-            ...mapState(['todoList']),
+            ...mapState(['todoList','isPop','timerId']),
             doneNumber(){
                 return this.todoList.filter((todo)=>{
                     return todo.isClear === true
@@ -75,6 +90,18 @@ import { mapState } from 'vuex';
                     width:this.donePercent + '%',
                     "background-color": this.changeColor
                 }
+            }
+        },
+        methods:{
+            popOut(){
+                clearTimeout(this.timerId)
+                this.$store.commit('TOGGLEPOP',true)
+            },
+            popLeave(){
+                this.timeId = setTimeout(() => {
+                    this.$store.commit('TOGGLEPOP',false)
+                }, 500)
+                this.$store.commit('TIMERID',this.timeId)
             }
         }
     }

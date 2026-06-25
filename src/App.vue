@@ -30,6 +30,7 @@ import deleteAbout from './components/deleteAbout.vue';
 import searchAbout from './components/searchAbout.vue';
 import progressBar from './components/progressBar.vue';
 
+
 import moment from 'moment'
 moment.locale('zh-cn')
 

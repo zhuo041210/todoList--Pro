@@ -29,6 +29,7 @@
         border: 2px solid #dce1e8;
         border-radius: 20px;
         outline: none;
+        transition: all 0.3s ease;
     }
     .MyInput:focus {
         outline: none;

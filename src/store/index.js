@@ -48,6 +48,12 @@ const mutations = {
         })
         result.content = editContent
         localStorage.setItem('todoList',JSON.stringify(state.todoList))
+    },
+    TOGGLEPOP(state,value){
+        state.isPop = value
+    },
+    TIMERID(state,TIMERID){
+        state.timerId = TIMERID
     }
 }
 
@@ -60,7 +66,9 @@ const state = {
             return []
         }
     })(),
-    searchKeyword: ''
+    searchKeyword: '',
+    isPop:false,
+    timerId:null
 }
 
 const getters = {
