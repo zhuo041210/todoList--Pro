@@ -54,10 +54,6 @@ const mutations = {
     },
     TIMERID(state,TIMERID){
         state.timerId = TIMERID
-    },
-    DRAGLISTUPDATE(state,newList){
-        state.todoList = newList
-        localStorage.setItem('todoList',JSON.stringify(state.todoList))
     }
 }
 

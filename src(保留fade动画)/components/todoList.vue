@@ -1,15 +1,7 @@
 <template>
     <div class="todoList">
         <div class="midBox">
-           <draggable 
-            v-model="localList" 
-            :options="{ 
-                animation: 450,
-                // 搜索时禁用拖拽功能，因为此时drag绑定的数组和div循环所依赖的数组不一致；理论上来讲，它们应该是一致的；
-                // 我确实在办法实现搜索功能的同时满足拖拽功能，但想了很久最终还是决定放弃了，目前我的水平和对相关知识的掌握还是不足
-                disabled: !!searchKeyword
-             }" 
-            tag="div">
+            <transition-group name="fade" tag="div">
                 <div class="listSingle" v-for="thing in filteredList" :key="thing.id">
                     <!-- todo前方的勾选框 -->
                     <div class="select" 
@@ -38,7 +30,7 @@
                     <!-- todo后方的删除键 -->
                     <div class="delete" @click="deleteTodo(thing.id)">×</div>
                 </div>
-            </draggable>
+            </transition-group>
         </div>
     </div>
 </template>
@@ -126,14 +118,14 @@
         color: rgb(104, 104, 104);
     }
     
-    /* .fade-enter {  
+    .fade-enter {  
         opacity: 0;
         transform: translateY(-10px);
     }
     .fade-enter-active {
         background-color: rgb(229, 252, 229);
         transition: all 0.6s ease;
-    } */
+    }
     /* .fade-leave-active {
         background-color: rgb(253, 197, 197);
         transition: all 0.6s ease;
@@ -146,7 +138,6 @@
 
 <script>
 import { mapState } from 'vuex';
-import draggable from 'vuedraggable'
 
     export default {
         name:'ToDoList',
@@ -156,9 +147,6 @@ import draggable from 'vuedraggable'
                 editContent:'',
                 isEsc:false
             }
-        },
-        components:{
-            draggable
         },
         directives:{
             focus:{
@@ -179,15 +167,8 @@ import draggable from 'vuedraggable'
                         todo.content.toLowerCase().includes(keyword)
                     )
                 }
-            }, 
-            localList:{
-                get(){
-                    return this.todoList
-                },
-                set(newVal){
-                    this.$store.commit('DRAGLISTUPDATE',newVal)
-                }
-            }
+            } 
+
         },
         methods:{
             deleteTodo(id){
