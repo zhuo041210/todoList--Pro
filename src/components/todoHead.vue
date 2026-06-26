@@ -2,7 +2,7 @@
     <div class="todoHead">
         <div class="midBox">
             <h2>📋 待办清单</h2>
-            <span class="smallNumber">{{ count }}</span>
+            <span class="smallNumber" title="未完成待办数量">{{ count }}</span>
         </div>
     </div>
 </template>

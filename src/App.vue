@@ -1,6 +1,6 @@
 <template>
     <div class="app">
-      <h1  :class="{ WorkDay:isWorkDay }" class="title">{{ DateType }}</h1>
+      <h1  :class="{ WorkDay:isWorkDay }" class="title" title="动态判断工作/休息日">{{ DateType }}</h1>
       <chickenSoup/>
       <MyHeader/>
       <div class="rowBox">

@@ -32,7 +32,7 @@
         cursor: pointer;
     }
     .myButton {
-        width: 25%;
+        width: 40%;
         height: 34px;
         margin: 0 0 0 auto;
         line-height: 34px;

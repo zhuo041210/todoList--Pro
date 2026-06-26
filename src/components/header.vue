@@ -1,9 +1,9 @@
 <template>
         <div class="boarder">
-            <div class="clock-time">
+            <div class="clock-time" title="时钟组件">
                 {{ time }}
             </div>
-            <div class="clock-date">
+            <div class="clock-date" title="日期组件">
                 {{ date }}
                 {{ day }}
             </div>
