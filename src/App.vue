@@ -1,6 +1,7 @@
 <template>
     <div class="app">
       <h1  :class="{ WorkDay:isWorkDay }" class="title">{{ DateType }}</h1>
+      <chickenSoup/>
       <MyHeader/>
       <div class="rowBox">
         <todoHead/>
@@ -29,6 +30,7 @@ import todoList from './components/todoList.vue';
 import deleteAbout from './components/deleteAbout.vue';
 import searchAbout from './components/searchAbout.vue';
 import progressBar from './components/progressBar.vue';
+import chickenSoup from './components/chickenSoup.vue';
 
 
 import moment from 'moment'
@@ -44,6 +46,7 @@ export default {
     deleteAbout,
     searchAbout,
     progressBar,
+    chickenSoup
   },
   data(){
     return {
@@ -155,5 +158,7 @@ export default {
   .RestAni-enter-active {
         transition: all 0.6s ease;
   }
-  
+  h1 {
+    margin-bottom: 5px;
+  }
 </style>
