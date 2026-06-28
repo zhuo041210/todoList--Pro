@@ -58,6 +58,10 @@ const mutations = {
     DRAGLISTUPDATE(state,newList){
         state.todoList = newList
         localStorage.setItem('todoList',JSON.stringify(state.todoList))
+    },
+    CHANGEMODETO(state,val){
+        state.isNight = val,
+        localStorage.setItem('nightMode',state.isNight) 
     }
 }
 
@@ -72,7 +76,15 @@ const state = {
     })(),
     searchKeyword: '',
     isPop:false,
-    timerId:null
+    timerId:null,
+    isNight:(()=>{
+        try {
+            return localStorage.getItem('nightMode') === 'true' ?  true : false
+        }catch{
+            localStorage.removeItem('nightMode')
+            return false
+        }
+    })(),
 }
 
 const getters = {

@@ -48,6 +48,7 @@
     .mySpan {
         font-size: 14px;
         line-height: 35px;
+        color: var(--checkall-textColor);
     }
     .select {
         box-sizing: border-box;

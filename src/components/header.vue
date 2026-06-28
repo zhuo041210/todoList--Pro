@@ -26,7 +26,7 @@
         line-height: 70px;
         font-size: 70px;
         font-weight: 200;
-        color: rgb(97, 189, 206);
+        color: var(--time-textColor);
         /* background-color: rgba(191, 235, 170, 1); */
         /* border-radius: 15px; */
         text-shadow: 1px 1px 3px rgb(139, 177, 235);
@@ -37,10 +37,10 @@
         line-height: 30px;
         font-size: 15px;
         font-weight: 500;
-        color: rgb(65, 124, 233);
+        color: var(--date-textColor);
         text-shadow: rgb(123, 229, 236);
         margin-bottom: 10px;
-        background-color: rgb(197, 238, 181);
+        background-color: var(--date-backgroundColor);
         border-radius: 20px;
     }
 </style>

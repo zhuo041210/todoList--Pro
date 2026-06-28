@@ -3,14 +3,16 @@
         <div class="midBox">
             <transition name="fade-up-one">
                 <span class="active"
+                    style="transition: none"
                     v-if="soup"
-                    title="这是自己搭建的后端返回的数据哦！">
+                    @click="changeSoup"
+                    :title="`这是自己搭建的后端返回的数据哦！已喝${soupNum}碗鸡汤`">
                     {{ soup }}
                 </span>
             </transition>
                 <span class="default" v-if="!soup">
-                    加载今日鸡汤ing... 
-                </span>          
+                    加载今日鸡汤ing...🥣
+                </span>       
         </div>
     </div>
 </template>
@@ -20,7 +22,8 @@
         name:"MySoup",
         data(){
             return {
-                soup:''
+                soup:'',
+                soupNum:0
             }
         },
         methods:{
@@ -28,7 +31,7 @@
                await new Promise((resolve)=>{
                     setTimeout(() => {
                         resolve()
-                    }, 300);
+                    }, 300)
                })
                 const isDev = process.env.NODE_ENV === 'development'
                 const baseUrl = isDev? 'http://localhost:8888':''
@@ -36,10 +39,17 @@
                     const res = await fetch(`${baseUrl}/.netlify/functions/soup`)
                     const data = await res.json()
                     this.soup = data.message
+                    this.soupNum = this.soupNum + 1
                 }
                 catch{
-                    this.soup = '加载失败，请稍后重试'
+                    this.soup = '加载鸡汤失败，请稍后重试'
                 }
+            },
+            changeSoup(){
+                this.soup = ''
+                this.$nextTick(() => {
+                    this.getSoup()
+                })
             }
         },
             mounted(){
@@ -60,28 +70,29 @@
         display: inline-block;
         font-size: 18px;
         margin: 5px auto 3px auto;
-        transition: all 0.4s ease;
+        /* transition: all 0.4s ease; */
+        /* 排查最久的错误 transition和animation是两套完全不同的机制 不能混用 不然退场会延迟 */
     }
     .default {
         color: rgb(129, 129, 129);
     }
     .active {
-        color: rgb(32, 184, 32);
+        color: var(--soup-textColor);
     }
 
     .fade-up-one-enter-active {
-        animation: fadeUpOne 0.6s ease forwards;
+        animation: fadeUpOne 0.3s ease forwards;
     }
     @keyframes fadeUpOne {
         0% {
             opacity: 0;
             transform: translateY(12px);
-            background-color: rgb(188, 248, 188);
+            background-color: var(--soup-changeToColor);
         }
         100% {
             opacity: 1;
             transform: translateY(0);
-            background-color: white;
+            background-color: var(--soup-changeColor);
         }
     }
 </style>

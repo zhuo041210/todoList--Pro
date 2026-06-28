@@ -1,6 +1,9 @@
 <template>
     <div class="app">
-      <h1  :class="{ WorkDay:isWorkDay }" class="title" title="动态判断工作/休息日">{{ DateType }}</h1>
+      <div class="top">
+        <h1  :class="{ WorkDay:isWorkDay }" class="title" title="动态判断工作/休息日">{{ DateType }}</h1>
+        <darkMode/>
+      </div>
       <chickenSoup/>
       <MyHeader/>
       <div class="rowBox">
@@ -31,6 +34,7 @@ import deleteAbout from './components/deleteAbout.vue';
 import searchAbout from './components/searchAbout.vue';
 import progressBar from './components/progressBar.vue';
 import chickenSoup from './components/chickenSoup.vue';
+import darkMode from './components/darkMode.vue';
 
 
 import moment from 'moment'
@@ -46,7 +50,8 @@ export default {
     deleteAbout,
     searchAbout,
     progressBar,
-    chickenSoup
+    chickenSoup,
+    darkMode
   },
   data(){
     return {
@@ -55,7 +60,7 @@ export default {
     }
   },
   computed:{
-    ...mapState(['todoList']),
+    ...mapState(['todoList','isNight']),
     DateType(){
         return this.isWorkDay ? '工作日':'休息日' 
     }
@@ -75,6 +80,14 @@ export default {
            }
     }
   },
+  watch:{
+    isNight:{
+      handler(newVal){
+        document.documentElement.classList.toggle('dark',newVal)
+      },
+      immediate:true
+    }
+  },
   mounted(){
     this.getTime()
     this.timer = setInterval(() => {
@@ -87,22 +100,92 @@ export default {
 }
 </script>
 
+<!-- 这是一项大工程 要改一百多个样式 -->
 <style>
+  * {
+    transition: background-color 0.5s ease,
+    color 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease,
+    text-shadow 0.5s ease;
+  }
+
+  :root {
+    --html-backgroundColor: rgb(192, 255, 184);
+    --app-backgroundColor: rgb(254, 254, 254);
+    --time-textColor:  rgb(97, 189, 206);
+    --date-textColor: rgb(65, 124, 233);
+    --date-backgroundColor: rgb(197, 238, 181);
+    --soup-textColor: rgb(32, 184, 32);
+    --soup-changeColor: white;
+    --soup-changeToColor: rgb(188, 248, 188);
+    --list-textColor: black;
+    --inputBottom-backgroundColor: #4A90D9;
+    --checkall-textColor: black;
+    --listSingle-backgroundColor: white;
+    --listSingle-backgroundColorChange: rgb(228, 228, 228);
+    --search-borderColor: #3498db;
+    --add-borderColor: #3498db;
+    --singleTodo-textColor: black;
+    --singleTodo-deleteColor: rgb(148, 148, 148);
+  }
+
+  .dark {
+    --html-backgroundColor: rgb(19, 19, 19);
+    --app-backgroundColor:  #181818;
+    --time-textColor:  #e6edf3;
+    --date-textColor: #e6edf3;
+    --date-backgroundColor: rgb(55, 133, 24);
+    --soup-textColor: #e6edf3;
+    --soup-changeColor: #181818;
+    --soup-changeToColor: rgb(255, 255, 255);
+    --list-textColor: white;
+    --inputBottom-backgroundColor: rgb(88, 228, 60);
+    --checkall-textColor: #e6edf3;
+    --listSingle-backgroundColor: #818cf8;
+    --listSingle-backgroundColorChange: rgb(77, 216, 226);
+    --search-borderColor: #c084fc;
+    --add-borderColor: #c084fc;
+    --singleTodo-textColor: #e6edf3;
+    --singleTodo-deleteColor: #e6edf3;
+  }
+</style>
+
+<style scoped>
   .app {
     width: 100%;
     max-width: 700px;
     margin: 0 auto;
-    background-color: rgb(254, 254, 254);
+    background-color: var(--app-backgroundColor);
     border-radius: 36px;
     box-shadow: 1px 1px 10px 0 rgb(196, 196, 196);
     border: 1px solid rgb(228, 228, 228);
     user-select: none;
   }
+  /* 炫彩休息日！ */
   .title {
     text-align: center;
-    color: rgb(79, 103, 153);
     font-size: 30px;
+    background: linear-gradient(to right, 
+      #ff0000, #ff7f00, #ffff00, #00ff00,
+      #0000ff, #4b0082, #8b00ff
+    );
+    background-size: 200% auto;
+    /* 直接复制的 有时间去学习一下clip属性 */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbowMove 9s linear infinite;
   }
+  @keyframes rainbowMove {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+  /* 炫彩休息日！ */
   .noRoutine {
     width: 90%;
     height: 150px;
@@ -111,9 +194,9 @@ export default {
     text-align: center;
     line-height: 150px;
   }
-  .WorkDay {
+  /* .WorkDay {
     color: red;
-  }
+  } */
   .rowBox {
     display: flex;
     width: 90%;
@@ -160,5 +243,10 @@ export default {
   }
   h1 {
     margin-bottom: 5px;
+  }
+  .top {
+    position: relative;
+    display: flex;
+    justify-content: center;
   }
 </style>

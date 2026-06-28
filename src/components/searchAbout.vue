@@ -5,7 +5,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     .searchIcon {
         font-size: 25px;
         line-height: 1;
@@ -33,7 +33,7 @@
     }
     .MyInput:focus {
         outline: none;
-        border-color: #3498db;
+        border-color: var(--search-borderColor);
         background: #ffffff;
         box-shadow: 0 0 0 1px rgba(52, 152, 219, 0.1);
     }

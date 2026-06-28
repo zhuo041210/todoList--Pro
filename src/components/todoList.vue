@@ -80,9 +80,10 @@
         line-height: 40px;
         display: flex;
         align-items: center;
+        background-color: var(--listSingle-backgroundColor);
     }
     .listSingle:hover {
-        background: rgb(228, 228, 228);
+        background: var(--listSingle-backgroundColorChange);
     }
     .select {
         box-sizing: border-box;
@@ -101,13 +102,14 @@
     }
     .text {
         width: 75%;
+        color: var(--singleTodo-textColor);
     }
     .delete {
         width: 36px;
         height: 36px;
         border-radius: 18px;
         font-size: 24px;
-        color: rgb(148, 148, 148);
+        color: var(--singleTodo-deleteColor);
         margin-left: auto;
         text-align: center;
         line-height: 36px;
@@ -222,6 +224,7 @@ import draggable from 'vuedraggable'
                 }).content
             },
             editFinish(id){
+                const beforeContent = this.editContent
                 if(this.isEsc){
                     this.$message({
                         type: 'info',
@@ -232,6 +235,11 @@ import draggable from 'vuedraggable'
                    this.$message({
                         message: '编辑后消息不能为空！',
                         type: 'warning'
+                    })
+                }else if(this.editContent === beforeContent){
+                    this.$message({
+                        message: '撤销编辑！',
+                        type: 'info'
                     })
                 }else{
                     this.$store.commit('EDITFINISH',{ id , editContent:this.editContent })

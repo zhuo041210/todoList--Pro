@@ -30,22 +30,22 @@
     }
     input:focus {
         outline: none;
-        border-color: #3498db;
+        border-color: var(--add-borderColor);
         background: #ffffff;
         box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
     }
     button {
         width: 20%;
         height: 42px;
+        font-size: 16px;
         border-radius: 21px;
         border: none;
-        background: #4A90D9;
+        background: var(--inputBottom-backgroundColor);
         color: white;
         cursor: pointer;
         transition: all 0.3s ease;
     }
     button:hover {
-        background: #4A90D9;
         transform: scale(0.98);
         box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.3);
     }

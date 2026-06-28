@@ -29,6 +29,9 @@
         flex: 1;
         min-width: 180px;
     }
+    h2 {
+        color: var(--list-textColor);
+    }
 </style>
 
 <script>
