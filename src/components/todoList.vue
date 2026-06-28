@@ -156,7 +156,8 @@ import draggable from 'vuedraggable'
             return {
                 editId:0,
                 editContent:'',
-                isEsc:false
+                isEsc:false,
+                originContent:''
             }
         },
         components:{
@@ -222,9 +223,9 @@ import draggable from 'vuedraggable'
                 this.editContent = this.todoList.find((todo)=>{
                     return todo.id === id
                 }).content
+                this.originContent = this.editContent
             },
             editFinish(id){
-                const beforeContent = this.editContent
                 if(this.isEsc){
                     this.$message({
                         type: 'info',
@@ -236,10 +237,15 @@ import draggable from 'vuedraggable'
                         message: '编辑后消息不能为空！',
                         type: 'warning'
                     })
-                }else if(this.editContent === beforeContent){
+                }else if(this.editContent === this.originContent){
                     this.$message({
-                        message: '撤销编辑！',
+                        message: '内容不变，撤销编辑！',
                         type: 'info'
+                    })
+                }else if(this.todoList.find((todo)=>todo.content === this.editContent)){
+                    this.$message({
+                        message: '该任务已存在！',
+                        type: 'warning'
                     })
                 }else{
                     this.$store.commit('EDITFINISH',{ id , editContent:this.editContent })
