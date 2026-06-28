@@ -13,13 +13,13 @@
       <todoInput/>
         <todoList/>
         <transition name="BarAni">
-          <progressBar v-if="todoList.length !== 0"/>
+          <progressBar class="no-transition" v-if="todoList.length !== 0"/>
         </transition>
         <transition name="DeleteAni">
-          <deleteAbout v-if="todoList.length !== 0"/>
+          <deleteAbout class="no-transition" v-if="todoList.length !== 0"/>
         </transition>
         <transition name="RestAni">
-          <h2 class="noRoutine" v-if="todoList.length === 0">✨ 没有待办 · 享受宁静吧</h2>
+          <h2 :class="['noRoutine','no-transition']" v-if="todoList.length === 0">✨ 没有待办 · 享受宁静吧</h2>
         </transition>
     </div> 
 </template>
@@ -100,10 +100,12 @@ export default {
 }
 </script>
 
-<!-- 这是一项大工程 要改一百多个样式 -->
+<!-- 这是一项大工程 要改一百多个样式 目前我简化了 只优化了部分样式 -->
 <style>
-  * {
-    transition: background-color 0.5s ease,
+/* 取消某些元素的动画效果 */
+  .app *:not(.no-transition) {
+    transition: 
+    background-color 0.5s ease,
     color 0.5s ease,
     border-color 0.5s ease,
     box-shadow 0.5s ease,
@@ -212,9 +214,9 @@ export default {
         transition: all 0.6s ease;
   }
   /* .BarAni-leave-active {
-        transition: all 0.6s ease;
-  }
-  .BarAni-leave-to {
+        transition: all 0s ease;
+  } */
+  /* .BarAni-leave-to {
         opacity: 0;
         transform: translateY(-10px);
   } */
@@ -226,10 +228,11 @@ export default {
   .DeleteAni-enter-active {
         transition: all 0.6s ease;
   }
+
   /* .DeleteAni-leave-active {
-        transition: all 0.6s ease;
-  }
-  .DeleteAni-leave-to {
+        transition: all 0s ease;
+  } */
+  /* .DeleteAni-leave-to {
         opacity: 0;
         transform: translateY(-10px);
   } */

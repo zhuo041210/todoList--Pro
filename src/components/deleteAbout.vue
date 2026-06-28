@@ -101,7 +101,8 @@ import { mapState } from 'vuex';
                     this.$confirm(`确定删除已完成的 ${this.todoList.length - nowList.length} 项任务吗?`, '提示', {
                         confirmButtonText: '确定',
                         cancelButtonText: '取消',
-                        type: 'warning'
+                        type: 'warning',
+                        customClass: 'no-transition'
                         })
                         .then(() => {
                         this.$store.commit('DELETEMULTI',nowList)

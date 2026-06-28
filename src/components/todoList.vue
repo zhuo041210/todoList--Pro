@@ -10,14 +10,13 @@
                 disabled: !!searchKeyword
              }" 
             tag="div">
-                <div class="listSingle" v-for="thing in filteredList" :key="thing.id">
+                    <div class="listSingle" v-for="thing in filteredList" :key="thing.id">
                     <!-- todo前方的勾选框 -->
                     <div class="select" 
                         @click="changeFace(thing.id)" 
                         :class="{ Active: thing.isClear }">
                         {{ thing.isClear?'✓':' ' }}
                     </div>
-                    
                     <!-- 修改内容的功能 -->
                     <span class="text" 
                         @dblclick="edit(thing.id)" 
@@ -34,7 +33,6 @@
                         @keyup.esc="rollBackContent"
                         placeholder="请输入更改内容..." 
                         class="myInput">
-                    
                     <!-- todo后方的删除键 -->
                     <div class="delete" @click="deleteTodo(thing.id)">×</div>
                 </div>
@@ -128,15 +126,15 @@
         color: rgb(104, 104, 104);
     }
     
-    /* .fade-enter {  
+    /* .todoAnimation-enter {  
         opacity: 0;
         transform: translateY(-10px);
     }
-    .fade-enter-active {
+    .todoAnimation-enter-active {
         background-color: rgb(229, 252, 229);
         transition: all 0.6s ease;
-    } */
-    /* .fade-leave-active {
+    }  */
+    /* /* .fade-leave-active {
         background-color: rgb(253, 197, 197);
         transition: all 0.6s ease;
     }
@@ -144,6 +142,7 @@
         opacity: 0;
         transform: translateY(-10px);
     } */
+    
 </style>
 
 <script>
@@ -200,7 +199,8 @@ import draggable from 'vuedraggable'
                 this.$confirm(`确定删除任务 ${result} 吗?`, '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
-                    type: 'warning'
+                    type: 'warning',
+                    customClass: 'no-transition'
                     })
                     .then(() => {
                     this.$store.commit('DELETETODO',id)

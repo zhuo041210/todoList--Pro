@@ -37,7 +37,7 @@
     .progress {
         height: 100%;
         border-radius: 8px;
-        transition: all 0.4s ease;
+        transition: all 0.4s ease !important;
     }
     .span {
         position: absolute;
