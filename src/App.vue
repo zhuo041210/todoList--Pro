@@ -1,7 +1,7 @@
 <template>
     <div class="app">
       <div class="top">
-        <h1  :class="{ WorkDay:isWorkDay }" class="title" title="动态判断工作/休息日">{{ DateType }}</h1>
+        <h1  :class="{ notWorkDay:!isWorkDay }" class="title" title="动态判断工作/休息日">{{ DateType }}</h1>
         <darkMode/>
       </div>
       <chickenSoup/>
@@ -165,19 +165,19 @@ export default {
     user-select: none;
   }
   /* 炫彩休息日！ */
-  .title {
-    text-align: center;
-    font-size: 30px;
-    background: linear-gradient(to right, 
-      #ff0000, #ff7f00, #ffff00, #00ff00,
-      #0000ff, #4b0082, #8b00ff
-    );
-    background-size: 200% auto;
-    /* 直接复制的 有时间去学习一下clip属性 */
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: rainbowMove 9s linear infinite;
+  .notWorkDay {
+      text-align: center;
+      font-size: 30px;
+      background: linear-gradient(to right, 
+        #ff0000, #ff7f00, #ffff00, #00ff00,
+        #0000ff, #4b0082, #8b00ff
+      );
+      background-size: 200% auto;
+      /* 直接复制的 有时间去学习一下clip属性 */
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbowMove 9s linear infinite;
   }
   @keyframes rainbowMove {
     0% {
@@ -196,9 +196,9 @@ export default {
     text-align: center;
     line-height: 150px;
   }
-  /* .WorkDay {
+  .title {
     color: red;
-  } */
+  }
   .rowBox {
     display: flex;
     width: 90%;

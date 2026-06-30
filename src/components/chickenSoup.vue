@@ -3,7 +3,7 @@
         <div class="midBox">
             <transition name="fade-up-one">
                 <span class="active"
-                    style="transition: none"
+                    style="transition: none;"
                     v-if="soup"
                     @click="changeSoup"
                     :title="`这是自己搭建的后端返回的数据哦！已喝${soupNum}碗鸡汤`">
@@ -75,9 +75,11 @@
     }
     .default {
         color: rgb(129, 129, 129);
+        transition: none !important;;
     }
     .active {
         color: var(--soup-textColor);
+        transition: all 0s ease !important;
     }
 
     .fade-up-one-enter-active {
